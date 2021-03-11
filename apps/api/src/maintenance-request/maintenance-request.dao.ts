@@ -36,6 +36,7 @@ export class MaintenanceRequestDao {
         ...id,
         ...maintenanceRequest,
         submittedAt: new Date(),
+        //Added a completed field since it seems like that was needed according to the requirements
         completed: false,
       })
       .write()

@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
     let maintenanceRequest = this.maintForm.value
 
     this.httpConfigService
-      .addHero(maintenanceRequest).subscribe(resp => {
+      .addMaintenanceRequest(maintenanceRequest).subscribe(resp => {
         console.log(resp);
       });;
   }
