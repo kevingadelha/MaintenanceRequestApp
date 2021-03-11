@@ -36,18 +36,25 @@ export class MaintenanceRequestDao {
         ...id,
         ...maintenanceRequest,
         submittedAt: new Date(),
-        //Added a completed field since it seems like that was needed according to the requirements
-        completed: false,
+        //Added an open field since it seems like that was needed according to the requirements
+        open: true,
       })
       .write()
     return id;
   }
 
   async getMaintenanceRequest(id: string): Promise<MaintenanceRequestDB> {
+
     return await this.collection.find({ id }).value();
+  }
+
+  async closeMaintenanceRequest(id: string): Promise<MaintenanceRequestDB> {
+    return this.collection.find({ id })
+    .assign({"open" : false})
+    .write();
   }
   
   async getOpenMaintenanceRequests(): Promise<MaintenanceRequestDB> {
-    return await this.collection.filter( {"completed": false} ).value();
+    return await this.collection.filter( {"open": true} ).value();
   }
 }
