@@ -2,12 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ALL_SERVICE_TYPES } from '@suiteportal/api-interfaces';
 import { FormGroup, FormControl } from '@angular/forms';
 
+import { MaintenanceRequest } from '@suiteportal/api-interfaces';
+import { HTTPConfigService } from '../httpservice/httpconfig.service';
+
 @Component({
   selector: 'pm-home',
   templateUrl: './home.component.html',
+  providers: [HTTPConfigService],
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
 
   maintForm = new FormGroup({
     apartmentUnit: new FormControl(''),
@@ -20,17 +25,20 @@ export class HomeComponent implements OnInit {
 
   serviceTypes = ALL_SERVICE_TYPES;
 
-  constructor() {
-    //
-  }
+  constructor(private httpConfigService: HTTPConfigService) {}
 
   ngOnInit(): void {
     //
   }
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.maintForm.value);
+
+    let maintenanceRequest = this.maintForm.value
+
+    this.httpConfigService
+      .addHero(maintenanceRequest).subscribe(resp => {
+        console.log(resp);
+      });;
   }
 
 }
