@@ -36,6 +36,7 @@ export class MaintenanceRequestDao {
         ...id,
         ...maintenanceRequest,
         submittedAt: new Date(),
+        completed: false,
       })
       .write()
     return id;
@@ -43,5 +44,9 @@ export class MaintenanceRequestDao {
 
   async getMaintenanceRequest(id: string): Promise<MaintenanceRequestDB> {
     return await this.collection.find({ id }).value();
+  }
+  
+  async getOpenMaintenanceRequests(): Promise<MaintenanceRequestDB> {
+    return await this.collection.filter( {"completed": false} ).value();
   }
 }

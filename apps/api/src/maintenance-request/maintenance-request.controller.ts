@@ -24,6 +24,11 @@ export class MaintenanceRequestController {
     return await this.maintenanceRequestService.createMaintenanceRequest(maintenanceRequest);
   }
 
+  @Get('/')
+  public async getOpenMaintenanceRequests() {
+    return await this.maintenanceRequestService.getOpenMaintenanceRequests();
+  }
+
   @Get('/:id')
   public async getMaintenanceRequest(
     @Param('id') id: string,
