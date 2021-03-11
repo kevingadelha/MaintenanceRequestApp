@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ALL_SERVICE_TYPES } from '@suiteportal/api-interfaces';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'pm-home',
@@ -7,6 +8,15 @@ import { ALL_SERVICE_TYPES } from '@suiteportal/api-interfaces';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  maintForm = new FormGroup({
+    apartmentUnit: new FormControl(''),
+    requesterName: new FormControl(''),
+    requesterEmail: new FormControl(''),
+    serviceType: new FormControl(''),
+    summary: new FormControl(''),
+    details: new FormControl(''),
+  });
 
   serviceTypes = ALL_SERVICE_TYPES;
 
@@ -16,6 +26,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     //
+  }
+
+  onSubmit() {
+    // TODO: Use EventEmitter with form value
+    console.warn(this.maintForm.value);
   }
 
 }
