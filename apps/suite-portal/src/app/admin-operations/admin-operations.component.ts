@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ALL_SERVICE_TYPES } from '@suiteportal/api-interfaces';
+import { ALL_SERVICE_TYPES, MaintenanceRequest } from '@suiteportal/api-interfaces';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import { HTTPConfigService } from '../httpservice/httpconfig.service';
-import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'pm-home',
@@ -14,7 +13,7 @@ import { isNullOrUndefined } from 'util';
 
 export class AdminOperationsComponent implements OnInit {
 
-
+  maintenanceRequests: MaintenanceRequest[] = [];
 
 
   serviceTypes = ALL_SERVICE_TYPES;
@@ -30,9 +29,13 @@ export class AdminOperationsComponent implements OnInit {
         window.location.href='/admin';
       }
       else{
-        //TODO: show the open requests
+        this.httpConfigService
+    .getOpenRequests().subscribe(resp => {
+      console.log(resp);
+      this.maintenanceRequests = resp;
+    });
       }
-    });;
+    });
   }
 
   onSubmit() {

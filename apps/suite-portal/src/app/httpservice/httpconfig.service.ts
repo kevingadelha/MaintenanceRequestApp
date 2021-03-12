@@ -37,6 +37,11 @@ export class HTTPConfigService {
     var result = this.http.post<TokenWrapper>(this.apiUrl+"/verify", tokenWrapper, httpOptions);
     return result;
   }
+  
+  getOpenRequests(): Observable<MaintenanceRequest[]> {
+    var result = this.http.get<MaintenanceRequest[]>(this.apiUrl, httpOptions);
+    return result;
+  }
 }
 
 

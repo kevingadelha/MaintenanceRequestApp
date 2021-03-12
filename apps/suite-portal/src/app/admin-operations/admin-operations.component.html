@@ -1,15 +1,26 @@
-<mat-grid-list cols="1" rowHeight="2:1">
-  <mat-grid-tile>
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>
-          Open Requests
-        </mat-card-title>
-      </mat-card-header>
-
-      <mat-card-content>
-        
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+<h2>Open Requests</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Unit #</th>
+          <th>Service Type</th>
+          <th>Summary</th>                            
+          <th>Details</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let maintenanceRequest of maintenanceRequests">
+          <td>{{maintenanceRequest.name}}</td>
+          <td>{{maintenanceRequest.email}}</td>
+          <td>{{maintenanceRequest.unitNumber}}</td>
+          <td>{{maintenanceRequest.serviceType}}</td>
+          <td>{{maintenanceRequest.summary}}</td>
+          <td>{{maintenanceRequest.details}}</td>
+          <td>
+              <button type="button">Close</button>
+          </td>
+      </tr>
+  </tbody>
+</table>
