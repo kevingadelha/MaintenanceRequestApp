@@ -11,17 +11,17 @@
         <form class="maint-form" [formGroup]="maintForm" (ngSubmit)="onSubmit()">
           <mat-form-field>
             <mat-label>Apartment Unit #</mat-label>
-            <input matInput type="text" formControlName="apartmentUnit" />
+            <input matInput type="text" formControlName="unitNumber" />
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Requester Name</mat-label>
-            <input matInput type="text" formControlName="requesterName" />
+            <input matInput type="text" formControlName="name" />
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Requester Email</mat-label>
-            <input matInput type="email" formControlName="requesterEmail" />
+            <input matInput type="email" formControlName="email" />
           </mat-form-field>
 
           <mat-form-field>

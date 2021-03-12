@@ -15,9 +15,9 @@ export class HomeComponent implements OnInit {
 
 
   maintForm = new FormGroup({
-    apartmentUnit: new FormControl(''),
-    requesterName: new FormControl(''),
-    requesterEmail: new FormControl(''),
+    unitNumber: new FormControl(''),
+    name: new FormControl(''),
+    email: new FormControl(''),
     serviceType: new FormControl(''),
     summary: new FormControl(''),
     details: new FormControl(''),
@@ -37,7 +37,8 @@ export class HomeComponent implements OnInit {
 
     this.httpConfigService
       .addMaintenanceRequest(maintenanceRequest).subscribe(resp => {
-        console.log(resp);
+        window.alert("Submitted");
+        this.maintForm.reset();
       });;
   }
 
