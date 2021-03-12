@@ -23,7 +23,7 @@ export class AdminOperationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.httpConfigService
-    .verify(sessionStorage.getItem('token')).subscribe(resp => {
+    .verify().subscribe(resp => {
       //If the response is not correct, redirect and alert
       if (resp.toString() != sessionStorage.getItem('token')){
         window.alert("You are not logged in or your session has expired");

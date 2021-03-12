@@ -26,7 +26,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.httpConfigService
-    .verify(sessionStorage.getItem('token')).subscribe(resp => {
+    .verify().subscribe(resp => {
       //If the user's already logged in, send them to the right place
       if (resp.toString() == sessionStorage.getItem('token')){
         window.location.href='/admin-operations';

@@ -31,7 +31,8 @@ export class HTTPConfigService {
     return result;
   }
   
-  verify(token: String): Observable<TokenWrapper> {
+  verify(): Observable<TokenWrapper> {
+    let token = sessionStorage.getItem('token')
     var tokenWrapper = { "token": token }
     var result = this.http.post<TokenWrapper>(this.apiUrl+"/verify", tokenWrapper, httpOptions);
     return result;
