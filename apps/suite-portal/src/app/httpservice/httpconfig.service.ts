@@ -7,7 +7,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 
-import { MaintenanceRequest } from '@suiteportal/api-interfaces';
+import { Account, MaintenanceRequest, TokenWrapper } from '@suiteportal/api-interfaces';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,9 +22,18 @@ export class HTTPConfigService {
   apiUrl = 'api/maintenance-requests';
 
   addMaintenanceRequest(maintenanceRequest: MaintenanceRequest): Observable<MaintenanceRequest> {
-    console.warn(maintenanceRequest);
     var result = this.http.post<MaintenanceRequest>(this.apiUrl, maintenanceRequest, httpOptions);
-console.warn(result);
+    return result;
+  }
+  
+  login(account: Account): Observable<Account> {
+    var result = this.http.post<Account>(this.apiUrl+"/login", account, httpOptions);
+    return result;
+  }
+  
+  verify(token: String): Observable<TokenWrapper> {
+    var tokenWrapper = { "token": token }
+    var result = this.http.post<TokenWrapper>(this.apiUrl+"/verify", tokenWrapper, httpOptions);
     return result;
   }
 }

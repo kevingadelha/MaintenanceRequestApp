@@ -3,6 +3,7 @@ import { ALL_SERVICE_TYPES } from '@suiteportal/api-interfaces';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import { HTTPConfigService } from '../httpservice/httpconfig.service';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'pm-home',
@@ -10,8 +11,9 @@ import { HTTPConfigService } from '../httpservice/httpconfig.service';
   providers: [HTTPConfigService],
   styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent implements OnInit {
 
+//TODO: rename this to adminlogin
+export class AdminComponent implements OnInit {
 
   loginForm = new FormGroup({
     username: new FormControl(''),
@@ -23,17 +25,32 @@ export class AdminComponent implements OnInit {
   constructor(private httpConfigService: HTTPConfigService) {}
 
   ngOnInit(): void {
-    //
+    this.httpConfigService
+    .verify(sessionStorage.getItem('token')).subscribe(resp => {
+      //If the user's already logged in, send them to the right place
+      if (resp.toString() == sessionStorage.getItem('token')){
+        window.location.href='/admin-operations';
+      }
+    });;
   }
 
   onSubmit() {
 
     let loginRequest = this.loginForm.value
 
-    /*this.httpConfigService
-      .addMaintenanceRequest(maintenanceRequest).subscribe(resp => {
-        console.log(resp);
-      });;*/
+
+
+    this.httpConfigService
+      .login(loginRequest).subscribe(resp => {
+        //If the response is empty, the username or password was wrong
+        if (!resp.toString()){
+          window.alert("Username or password was incorrect");
+        }
+        else{
+          sessionStorage.setItem('token', resp.toString());
+          window.location.href='/admin-operations';
+        }
+      });;
   }
 
 }

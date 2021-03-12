@@ -27,3 +27,12 @@ export interface MaintenanceRequest {
   details?: string;
 }
 
+export interface Account {
+  username: string;
+  password: string;
+}
+
+export interface TokenWrapper {
+  token: string;
+}
+

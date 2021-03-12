@@ -1,5 +1,5 @@
 import { BadRequestException, Body, Controller, Post, Get, Param } from '@nestjs/common';
-import { MaintenanceRequest } from '@suiteportal/api-interfaces';
+import { Account, MaintenanceRequest, TokenWrapper } from '@suiteportal/api-interfaces';
 import { isNullOrUndefined } from 'util';
 import { MaintenanceRequestService } from './maintenance-request.service';
 
@@ -55,6 +55,29 @@ export class MaintenanceRequestController {
       //I could alternatively return a completed message but this is more useful
       return result;
     }
+  }
+
+  @Post('/login')
+  public async login(
+    @Body() account: Account,
+  ) {
+    if (!account?.username) {
+      throw new BadRequestException('Must provide a valid username');
+    }
+    if (!account?.password) {
+      throw new BadRequestException('Must provide a valid password');
+    }
+    return await this.maintenanceRequestService.login(account);
+  }
+
+  @Post('/verify')
+  public async verify(
+    @Body() token: TokenWrapper,
+  ) {
+    if (!token) {
+      throw new BadRequestException('Must provide a token');
+    }
+    return await this.maintenanceRequestService.verify(token);
   }
 
 }

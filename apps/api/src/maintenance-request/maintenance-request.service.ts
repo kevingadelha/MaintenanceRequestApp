@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { MaintenanceRequest } from '@suiteportal/api-interfaces';
+import { Account, MaintenanceRequest, TokenWrapper } from '@suiteportal/api-interfaces';
 import { MaintenanceRequestDao, MaintenanceRequestDB } from './maintenance-request.dao';
 
 @Injectable()
@@ -25,5 +25,13 @@ export class MaintenanceRequestService {
 
   async closeMaintenanceRequest(id: string): Promise<MaintenanceRequestDB> {
     return await this.maintReqDao.closeMaintenanceRequest(id);
+  }
+
+  async login(account: Account): Promise<MaintenanceRequestDB> {
+    return await this.maintReqDao.login(account);
+  }
+
+  async verify(token: TokenWrapper): Promise<MaintenanceRequestDB>  {
+    return await this.maintReqDao.verify(token);
   }
 }
