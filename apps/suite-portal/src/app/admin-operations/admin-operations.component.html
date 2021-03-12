@@ -19,7 +19,7 @@
           <td>{{maintenanceRequest.summary}}</td>
           <td>{{maintenanceRequest.details}}</td>
           <td>
-              <button type="button">Close</button>
+            <button type="button" (click)="closeRequest(maintenanceRequest.id)">Close</button>
           </td>
       </tr>
   </tbody>

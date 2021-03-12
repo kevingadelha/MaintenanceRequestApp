@@ -42,6 +42,11 @@ export class HTTPConfigService {
     var result = this.http.get<MaintenanceRequest[]>(this.apiUrl, httpOptions);
     return result;
   }
+  
+  closeRequest(id: string): Observable<MaintenanceRequest> {
+    var result = this.http.post<MaintenanceRequest>(this.apiUrl + `/${ id }/close`, httpOptions);
+    return result;
+  }
 }
 
 

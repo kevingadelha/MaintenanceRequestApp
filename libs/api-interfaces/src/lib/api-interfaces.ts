@@ -13,6 +13,7 @@ export const ALL_SERVICE_TYPES = [
 ];
 
 export interface MaintenanceRequest {
+  id: string;
   // Name of the requester
   name: string;
   // Email of the requester

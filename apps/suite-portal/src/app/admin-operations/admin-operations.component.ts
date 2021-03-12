@@ -18,7 +18,7 @@ export class AdminOperationsComponent implements OnInit {
 
   serviceTypes = ALL_SERVICE_TYPES;
 
-  constructor(private httpConfigService: HTTPConfigService) {}
+  constructor(public httpConfigService: HTTPConfigService) {}
 
   ngOnInit(): void {
     this.httpConfigService
@@ -38,12 +38,10 @@ export class AdminOperationsComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-
-    
-
-
-   
+  closeRequest(id: string) {
+    this.httpConfigService.closeRequest(id).subscribe(resp => {
+      this.maintenanceRequests = this.maintenanceRequests.filter(request => request.id != resp.id)
+    });;
   }
 
 }
