@@ -26,8 +26,15 @@ export class MaintenanceRequestController {
   }
 
   @Get('/')
-  public async getOpenMaintenanceRequests() {
-    return await this.maintenanceRequestService.getOpenMaintenanceRequests();
+  public async getOpenMaintenanceRequests(
+    @Headers('AuthorizationToken') token: string
+  ) {
+    var tokenWrapper = { token: token };
+    var result = await this.maintenanceRequestService.verify(tokenWrapper);
+    if (result.toString() == token) {
+      return await this.maintenanceRequestService.getOpenMaintenanceRequests();
+    }
+    //Don't return anything if the user is not authorized
   }
 
   @Get('/:id')

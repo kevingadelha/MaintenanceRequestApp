@@ -12,7 +12,7 @@ import { Account, MaintenanceRequest, TokenWrapper } from '@suiteportal/api-inte
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    Authorization: 'my-auth-token'
+    AuthorizationToken: sessionStorage.getItem('token')
   })
 };
 
