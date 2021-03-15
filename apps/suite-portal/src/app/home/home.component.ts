@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ALL_SERVICE_TYPES } from '@suiteportal/api-interfaces';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { MaintenanceRequest } from '@suiteportal/api-interfaces';
 import { HTTPConfigService } from '../httpservice/httpconfig.service';
@@ -18,8 +18,12 @@ export class HomeComponent implements OnInit {
     unitNumber: new FormControl(''),
     name: new FormControl(''),
     email: new FormControl(''),
-    serviceType: new FormControl(''),
-    summary: new FormControl(''),
+    serviceType: new FormControl('', [
+      Validators.required,// <-- Here's how you pass in the custom validator.
+    ]),
+    summary: new FormControl('', [
+      Validators.required,// <-- Here's how you pass in the custom validator.
+    ]),
     details: new FormControl(''),
   });
 
